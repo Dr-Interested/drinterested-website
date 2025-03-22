@@ -1,8 +1,9 @@
 import Link from "next/link"
-import Image from "next/image"
+import { OptimizedImage } from "@/components/ui/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { blogCategories, getLatestPostByCategory } from "@/data/blog"
+import { formatDate } from "@/lib/utils"
 
 export default function BlogPage() {
   return (
@@ -69,11 +70,13 @@ export default function BlogPage() {
                         {latestPost ? (
                           <div className="bg-white rounded-lg overflow-hidden shadow-md h-full flex flex-col">
                             <div className="relative h-48 md:h-64">
-                              <Image
+                              <OptimizedImage
                                 src={latestPost.image || "/placeholder.svg"}
                                 alt={latestPost.title}
                                 fill
                                 className="object-cover"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                priority={true}
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                               <div className="absolute bottom-0 left-0 p-4 text-white">
@@ -81,7 +84,7 @@ export default function BlogPage() {
                               </div>
                             </div>
                             <div className="p-6 flex-grow flex flex-col">
-                              <span className="text-sm text-gray-600 mb-2">{latestPost.date}</span>
+                              <span className="text-sm text-gray-600 mb-2">{formatDate(latestPost.date)}</span>
                               <h4
                                 className="text-xl font-bold text-primary mb-3"
                                 style={{ fontFamily: "Playfair Display, serif" }}

@@ -7,7 +7,11 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import ScrollToTop from "@/components/scroll-to-top"
 
-const inter = Inter({ subsets: ["latin"] })
+// Use a subset to reduce font size and improve performance
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap", // Optimize font display
+})
 
 export const metadata: Metadata = {
   title: "Dr.Interested | Inspiring Future Healthcare Professionals",
@@ -16,7 +20,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -25,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -46,6 +50,3 @@ export default function RootLayout({
   )
 }
 
-
-
-import './globals.css'

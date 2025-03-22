@@ -1,9 +1,14 @@
 import Link from "next/link"
-import Image from "next/image"
+import { OptimizedImage } from "@/components/ui/image"
 import { ArrowLeft } from "lucide-react"
 import { blogPosts, getPostsByCategory } from "@/data/blog"
+import { formatDate } from "@/lib/utils"
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+export default function BlogPostPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const { slug } = params
 
   // Find the current post
@@ -76,7 +81,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
 
           <h1 className="heading-fancy text-primary mb-6">{title}</h1>
           <div className="flex items-center text-gray-600 mb-8">
-            <span>{currentPost?.date || "June 15, 2024"}</span>
+            <span>{currentPost ? formatDate(currentPost.date) : "June 15, 2024"}</span>
             <span className="mx-2">•</span>
             <span>Dr. Interested Team</span>
           </div>
@@ -87,11 +92,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <div className="relative h-[400px] w-full mb-8 rounded-lg overflow-hidden">
-              <Image
+              <OptimizedImage
                 src={currentPost?.image || `/placeholder.svg?height=800&width=1200&text=${slug.replace(/-/g, "+")}`}
                 alt={title}
                 fill
                 className="object-cover"
+                priority={true}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 800px"
               />
             </div>
 
@@ -138,7 +145,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                   {relatedPosts.map((post) => (
                     <div key={post.id} className="bg-tertiary rounded-lg p-4">
                       <h4 className="font-medium mb-2">{post.title}</h4>
-                      <p className="text-sm text-gray-600 mb-2">{post.date}</p>
+                      <p className="text-sm text-gray-600 mb-2">{formatDate(post.date)}</p>
                       <Link href={`/blog/${post.slug}`}>
                         <span className="text-secondary hover:underline">Read More</span>
                       </Link>

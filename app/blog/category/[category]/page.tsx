@@ -1,119 +1,15 @@
 import Link from "next/link"
-import Image from "next/image"
+import { OptimizedImage } from "@/components/ui/image"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
+import { blogPosts } from "@/data/blog"
+import { formatDate } from "@/lib/utils"
 
-// Types for our blog data
-type BlogPost = {
-  id: string
-  title: string
-  excerpt: string
-  category: string
-  slug: string
-  image: string
-  date: string
-}
-
-// Blog data
-const blogPosts: BlogPost[] = [
-  // Cancer Category
-  {
-    id: "cancer-overview",
-    title: "What is Cancer: A General Overview",
-    excerpt: "An introduction to cancer, its causes, and how it affects the body.",
-    category: "Cancer",
-    slug: "what-is-cancer-overview",
-    image: "/placeholder.svg?height=400&width=600&text=Cancer+Overview",
-    date: "June 15, 2024",
-  },
-  {
-    id: "immunotherapy",
-    title: "Immunotherapy",
-    excerpt: "Exploring how immunotherapy is revolutionizing cancer treatment.",
-    category: "Cancer",
-    slug: "immunotherapy",
-    image: "/placeholder.svg?height=400&width=600&text=Immunotherapy",
-    date: "June 10, 2024",
-  },
-  {
-    id: "coleys-toxins",
-    title: "Coley's Toxins",
-    excerpt: "The history and modern applications of Coley's Toxins in cancer treatment.",
-    category: "Cancer",
-    slug: "coleys-toxins",
-    image: "/placeholder.svg?height=400&width=600&text=Coleys+Toxins",
-    date: "June 5, 2024",
-  },
-
-  // Types of Doctors Category
-  {
-    id: "nephrologists",
-    title: "An Overview on Nephrologists",
-    excerpt: "Understanding the role of nephrologists in kidney health and disease management.",
-    category: "Types of Doctors",
-    slug: "overview-nephrologists",
-    image: "/placeholder.svg?height=400&width=600&text=Nephrologists",
-    date: "May 28, 2024",
-  },
-  {
-    id: "hepatology",
-    title: "Understanding Hepatology",
-    excerpt: "A deep dive into the field of hepatology and liver disease treatment.",
-    category: "Types of Doctors",
-    slug: "understanding-hepatology",
-    image: "/placeholder.svg?height=400&width=600&text=Hepatology",
-    date: "May 22, 2024",
-  },
-  {
-    id: "endocrinologists",
-    title: "The Role of Endocrinologists and a Case Study in Medullary Thyroid Cancer",
-    excerpt: "Exploring endocrinology through the lens of a complex thyroid cancer case.",
-    category: "Types of Doctors",
-    slug: "endocrinologists-thyroid-cancer",
-    image: "/placeholder.svg?height=400&width=600&text=Endocrinologists",
-    date: "May 15, 2024",
-  },
-  {
-    id: "internal-medicine",
-    title: "How Internal Medicine Doctors Solve Complex Cases",
-    excerpt: "The diagnostic approach and problem-solving methods used by internal medicine specialists.",
-    category: "Types of Doctors",
-    slug: "internal-medicine-complex-cases",
-    image: "/placeholder.svg?height=400&width=600&text=Internal+Medicine",
-    date: "May 8, 2024",
-  },
-  {
-    id: "cardiologists",
-    title: "The Vital Role of Cardiologists: Specialists in Heart Health",
-    excerpt: "Understanding the importance of cardiologists in diagnosing and treating heart conditions.",
-    category: "Types of Doctors",
-    slug: "cardiologists-heart-health",
-    image: "/placeholder.svg?height=400&width=600&text=Cardiologists",
-    date: "May 1, 2024",
-  },
-
-  // Types of Nurses Category
-  {
-    id: "pediatric-nurses",
-    title: "The Role and Importance of Pediatric Nurses",
-    excerpt: "How pediatric nurses provide specialized care for children and support for families.",
-    category: "Types of Nurses",
-    slug: "pediatric-nurses-role",
-    image: "/placeholder.svg?height=400&width=600&text=Pediatric+Nurses",
-    date: "April 25, 2024",
-  },
-  {
-    id: "elder-care",
-    title: "Specialization in Elder Care",
-    excerpt: "The unique challenges and rewards of nursing specialization in geriatric care.",
-    category: "Types of Nurses",
-    slug: "elder-care-specialization",
-    image: "/placeholder.svg?height=400&width=600&text=Elder+Care",
-    date: "April 18, 2024",
-  },
-]
-
-export default function CategoryPage({ params }: { params: { category: string } }) {
+export default function CategoryPage({
+  params,
+}: {
+  params: { category: string }
+}) {
   const { category } = params
 
   // Format category name for display
@@ -153,10 +49,16 @@ export default function CategoryPage({ params }: { params: { category: string } 
             {filteredPosts.map((post) => (
               <div key={post.id} className="bg-tertiary rounded-lg overflow-hidden shadow-md card-hover">
                 <div className="relative h-48">
-                  <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
+                  <OptimizedImage
+                    src={post.image || "/placeholder.svg"}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 </div>
                 <div className="p-6 space-y-4">
-                  <span className="text-sm text-gray-600">{post.date}</span>
+                  <span className="text-sm text-gray-600">{formatDate(post.date)}</span>
                   <h3 className="text-primary" style={{ fontFamily: "Playfair Display, serif" }}>
                     {post.title}
                   </h3>
