@@ -6,13 +6,11 @@ import { notFound } from "next/navigation"
 import { getPostBySlug } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
-type BlogPostPageProps = {
-  params: {
-    slug: string
-  }
+type BlogPostParams = {
+  slug: string
 }
 
-export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: BlogPostParams }): Promise<Metadata> {
   const post = getPostBySlug(params.slug)
 
   if (!post) {
@@ -27,7 +25,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPostPage({ params }: { params: BlogPostParams }) {
   const post = getPostBySlug(params.slug)
 
   if (!post) {
