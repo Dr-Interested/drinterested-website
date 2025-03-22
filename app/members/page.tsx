@@ -8,6 +8,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Linkedin, Instagram, ExternalLink, ChevronDown, ChevronUp, ArrowRight } from "lucide-react"
 import { president, vicePresidents, departments } from "@/data/members"
+import type { MemberType } from "@/data/members"
 
 // Completely redesigned ExpandableBio component
 const ExpandableBio = ({ bio }: { bio: string }) => {
@@ -60,7 +61,7 @@ const MemberCard = ({
   className = "",
   style = {},
 }: {
-  member: any
+  member: MemberType
   totalMembers: number
   className?: string
   style?: React.CSSProperties
@@ -217,7 +218,7 @@ const Department = ({ department, index }: { department: any; index: number }) =
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {Array.isArray(department.director) ? (
-                department.director.map((director) => (
+                department.director.map((director: MemberType) => (
                   <div key={director.id} className="flex gap-4 items-start hover-lift">
                     <div className="relative h-16 w-16 flex-shrink-0 rounded-full overflow-hidden">
                       <Image
@@ -325,7 +326,7 @@ const Department = ({ department, index }: { department: any; index: number }) =
             Members:
           </h4>
           <ul className="list-disc list-inside ml-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-            {department.members.map((member: any) => (
+            {department.members.map((member: MemberType) => (
               <li key={member.id}>{member.name}</li>
             ))}
           </ul>
@@ -343,7 +344,7 @@ const Department = ({ department, index }: { department: any; index: number }) =
       {showMembers && (
         <div className="bg-white p-8 rounded-lg shadow-md mb-8 fade-in">
           <div className={`grid ${getMemberGridClass()} gap-6`}>
-            {department.members.map((member: any, idx: number) => (
+            {department.members.map((member: MemberType, idx: number) => (
               <MemberCard
                 key={member.id}
                 member={member}
