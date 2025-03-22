@@ -6,37 +6,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'v0.blob.com',
+        hostname: '**',
       },
     ],
   },
-  // Improve performance by reducing the number of polyfills
   experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react'],
+    // Remove optimizeCss experiment as it requires critters
+    // optimizeCss: true,
   },
-  // Configure headers for better security and performance
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-        ],
-      },
-    ]
-  },
-};
+}
 
-export default nextConfig;
+export default nextConfig
+
