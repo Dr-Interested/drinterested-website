@@ -10,8 +10,6 @@ const nextConfig = {
       },
     ],
   },
-  // Enable optimizations
-  swcMinify: true,
   // Improve performance by reducing the number of polyfills
   experimental: {
     optimizeCss: true,
@@ -42,4 +40,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-

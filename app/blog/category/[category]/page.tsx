@@ -5,12 +5,13 @@ import { ArrowLeft } from "lucide-react"
 import { blogPosts } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
-export default function CategoryPage({
-  params,
-}: {
-  params: { category: string }
-}) {
-  const { category } = params
+type CategoryPageProps = {
+  params: {
+    category: string
+  }
+}
+
+export default function CategoryPage({ params }: CategoryPageProps) {
 
   // Format category name for display
   const getCategoryName = () => {

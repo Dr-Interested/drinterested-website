@@ -4,12 +4,13 @@ import { ArrowLeft } from "lucide-react"
 import { blogPosts, getPostsByCategory } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
-export default function BlogPostPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const { slug } = params
+type BlogPostPageProps = {
+  params: {
+    slug: string
+  }
+}
+
+export default function BlogPostPage({ params }: BlogPostPageProps) {
 
   // Find the current post
   const currentPost = blogPosts.find((post) => post.slug === slug)
