@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { OptimizedImage } from "@/components/ui/image"
-import { ArrowLeft } from 'lucide-react'
-import { blogPosts, getPostsByCategory } from "@/data/blog"
+import { ArrowLeft } from "lucide-react"
+import { getPostsByCategory, getPostBySlug } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
 export default function BlogPostPage({
@@ -12,7 +12,7 @@ export default function BlogPostPage({
   const { slug } = params
 
   // Find the current post
-  const currentPost = blogPosts.find((post) => post.slug === slug)
+  const currentPost = getPostBySlug(slug)
 
   // If post not found, use placeholder data
   const title =
@@ -83,7 +83,7 @@ export default function BlogPostPage({
           <div className="flex items-center text-gray-600 mb-8">
             <span>{currentPost ? formatDate(currentPost.date) : "June 15, 2024"}</span>
             <span className="mx-2">•</span>
-            <span>Dr. Interested Team</span>
+            <span>{currentPost?.author || "Dr. Interested Team"}</span>
           </div>
         </div>
       </section>
@@ -103,39 +103,48 @@ export default function BlogPostPage({
             </div>
 
             <div className="prose prose-lg max-w-none">
-              <p>
-                This is a placeholder for the blog post content. In a real application, this would be the full content
-                of the blog post with proper formatting, images, and other elements.
-              </p>
+              {currentPost ? (
+                <div dangerouslySetInnerHTML={{ __html: currentPost.content.replace(/\n/g, "<br />") }} />
+              ) : (
+                <>
+                  <p>
+                    This is a placeholder for the blog post content. In a real application, this would be the full
+                    content of the blog post with proper formatting, images, and other elements.
+                  </p>
 
-              <p>
-                The content would be fetched from a database or CMS based on the slug parameter: <strong>{slug}</strong>
-              </p>
+                  <p>
+                    The content would be fetched from a database or CMS based on the slug parameter:{" "}
+                    <strong>{slug}</strong>
+                  </p>
 
-              <h2>Introduction</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu
-                sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla
-                enim.
-              </p>
+                  <h2>Introduction</h2>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit
+                    arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut
+                    in nulla enim.
+                  </p>
 
-              <h2>Main Content</h2>
-              <p>
-                Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque
-                cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam.
-              </p>
+                  <h2>Main Content</h2>
+                  <p>
+                    Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna.
+                    Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget
+                    diam.
+                  </p>
 
-              <p>
-                Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia
-                molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in
-                ipsum sit amet pede facilisis laoreet.
-              </p>
+                  <p>
+                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi
+                    lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue
+                    elementum. Morbi in ipsum sit amet pede facilisis laoreet.
+                  </p>
 
-              <h2>Conclusion</h2>
-              <p>
-                Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut
-                ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper.
-              </p>
+                  <h2>Conclusion</h2>
+                  <p>
+                    Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada
+                    tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar
+                    ullamcorper.
+                  </p>
+                </>
+              )}
             </div>
 
             {relatedPosts.length > 0 && (
@@ -160,3 +169,4 @@ export default function BlogPostPage({
     </>
   )
 }
+

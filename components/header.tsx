@@ -7,7 +7,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown, Folder } from "lucide-react"
-import { blogCategories } from "@/data/blog"
+import { blogCategories, getPostsByCategory } from "@/data/blog"
 import { usePathname } from "next/navigation"
 
 const Header = () => {
@@ -332,29 +332,6 @@ const Header = () => {
       )}
     </header>
   )
-}
-
-// Helper function to get posts by category
-function getPostsByCategory(category: string) {
-  const posts = [
-    // Cancer
-    { slug: "what-is-cancer-overview", title: "What is Cancer: A General Overview", category: "cancer" },
-    { slug: "immunotherapy", title: "Immunotherapy", category: "cancer" },
-    { slug: "coleys-toxins", title: "Coley's Toxins", category: "cancer" },
-
-    // Types of Doctors
-    { slug: "overview-nephrologists", title: "An Overview on Nephrologists", category: "types-of-doctors" },
-    { slug: "understanding-hepatology", title: "Understanding Hepatology", category: "types-of-doctors" },
-    { slug: "endocrinologists-thyroid-cancer", title: "The Role of Endocrinologists", category: "types-of-doctors" },
-    { slug: "internal-medicine-complex-cases", title: "Internal Medicine Doctors", category: "types-of-doctors" },
-    { slug: "cardiologists-heart-health", title: "The Vital Role of Cardiologists", category: "types-of-doctors" },
-
-    // Types of Nurses
-    { slug: "pediatric-nurses-role", title: "The Role of Pediatric Nurses", category: "types-of-nurses" },
-    { slug: "elder-care-specialization", title: "Specialization in Elder Care", category: "types-of-nurses" },
-  ]
-
-  return posts.filter((post) => post.category === category)
 }
 
 export default Header

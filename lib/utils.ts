@@ -1,32 +1,31 @@
-import { type ClassValue, clsx } from "clsx"
+import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
-// Add a debounce function for performance optimization
-export function debounce<T extends (...args: any[]) => any>(func: T, wait: number): (...args: Parameters<T>) => void {
-  let timeout: ReturnType<typeof setTimeout> | null = null
-
-  return (...args: Parameters<T>) => {
-    const later = () => {
-      timeout = null
-      func(...args)
-    }
-
-    if (timeout) clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
-  }
-}
-
-// Format date for better display
-export function formatDate(dateString: string): string {
+export const formatDate = (dateString: string): string => {
   const date = new Date(dateString)
-  return new Intl.DateTimeFormat("en-US", {
+  const options: Intl.DateTimeFormatOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
-  }).format(date)
+  }
+  return date.toLocaleDateString(undefined, options)
+}
+
+// Utility function to debounce another function
+export function debounce<Params extends any[]>(
+  func: (...args: Params) => any,
+  timeout: number,
+): (...args: Params) => void {
+  let timer: NodeJS.Timeout
+  return (...args: Params) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      func(...args)
+    }, timeout)
+  }
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
 

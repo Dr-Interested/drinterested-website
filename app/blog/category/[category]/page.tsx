@@ -1,8 +1,8 @@
 import Link from "next/link"
 import { OptimizedImage } from "@/components/ui/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft } from 'lucide-react'
-import { blogPosts } from "@/data/blog"
+import { ArrowLeft } from "lucide-react"
+import { getPostsByCategory } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
 export default function CategoryPage({
@@ -26,7 +26,7 @@ export default function CategoryPage({
   const categoryName = getCategoryName()
 
   // Filter posts by category
-  const filteredPosts = blogPosts.filter((post) => post.category.toLowerCase().replace(/\s+/g, "-") === category)
+  const filteredPosts = getPostsByCategory(category)
 
   return (
     <>
@@ -94,3 +94,4 @@ export default function CategoryPage({
     </>
   )
 }
+
