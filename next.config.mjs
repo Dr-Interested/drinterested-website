@@ -10,10 +10,7 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    // Remove optimizeCss experiment as it requires critters
-    // optimizeCss: true,
-  },
+  // Remove experimental section to avoid issues with optimizeCss
 }
 
 export default nextConfig
