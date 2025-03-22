@@ -1,17 +1,16 @@
 import Link from "next/link"
 import { OptimizedImage } from "@/components/ui/image"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft } from 'lucide-react'
 import { blogPosts } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
-type CategoryPageProps = {
-  params: {
-    category: string
-  }
-}
-
-export default function CategoryPage({ params }: CategoryPageProps) {
+export default function CategoryPage({
+  params,
+}: {
+  params: { category: string }
+}) {
+  const { category } = params
 
   // Format category name for display
   const getCategoryName = () => {
@@ -95,4 +94,3 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     </>
   )
 }
-

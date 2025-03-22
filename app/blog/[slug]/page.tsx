@@ -1,16 +1,15 @@
 import Link from "next/link"
 import { OptimizedImage } from "@/components/ui/image"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft } from 'lucide-react'
 import { blogPosts, getPostsByCategory } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
-type BlogPostPageProps = {
-  params: {
-    slug: string
-  }
-}
-
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPostPage({
+  params,
+}: {
+  params: { slug: string }
+}) {
+  const { slug } = params
 
   // Find the current post
   const currentPost = blogPosts.find((post) => post.slug === slug)
@@ -161,4 +160,3 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
     </>
   )
 }
-
