@@ -5,11 +5,17 @@ import { ArrowLeft } from "lucide-react"
 import { getPostsByCategory } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
-type CategoryParams = {
+// Define the params type for this dynamic route
+type Params = {
   category: string
 }
 
-export default function CategoryPage({ params }: { params: CategoryParams }) {
+// Define the props type for the page component
+type Props = {
+  params: Params
+}
+
+export default function CategoryPage({ params }: Props) {
   const { category } = params
 
   // Format category name for display

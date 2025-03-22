@@ -6,11 +6,17 @@ import { notFound } from "next/navigation"
 import { getPostBySlug } from "@/data/blog"
 import { formatDate } from "@/lib/utils"
 
-type BlogPostParams = {
+// Define the params type for this dynamic route
+type Params = {
   slug: string
 }
 
-export async function generateMetadata({ params }: { params: BlogPostParams }): Promise<Metadata> {
+// Define the props type for the page component
+type Props = {
+  params: Params
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(params.slug)
 
   if (!post) {
@@ -25,7 +31,7 @@ export async function generateMetadata({ params }: { params: BlogPostParams }): 
   }
 }
 
-export default function BlogPostPage({ params }: { params: BlogPostParams }) {
+export default function BlogPostPage({ params }: Props) {
   const post = getPostBySlug(params.slug)
 
   if (!post) {
