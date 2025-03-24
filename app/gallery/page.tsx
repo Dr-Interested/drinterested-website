@@ -1,87 +1,81 @@
-import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
+
+const galleryCategories = [
+  {
+    id: "events",
+    title: "Event Highlights",
+    images: Array.from({ length: 6 }, (_, i) => ({
+      id: `event-${i + 1}`,
+      src: "/placeholder.svg?height=400&width=600",
+      alt: `Event highlight ${i + 1}`,
+    })),
+  },
+  {
+    id: "research",
+    title: "Research Showcase",
+    images: Array.from({ length: 6 }, (_, i) => ({
+      id: `research-${i + 1}`,
+      src: "/placeholder.svg?height=400&width=600",
+      alt: `Research showcase ${i + 1}`,
+    })),
+  },
+  {
+    id: "team",
+    title: "Team Building",
+    images: Array.from({ length: 6 }, (_, i) => ({
+      id: `team-${i + 1}`,
+      src: "/placeholder.svg?height=400&width=600",
+      alt: `Team building ${i + 1}`,
+    })),
+  },
+]
 
 export default function GalleryPage() {
   return (
-    <>
-      <section className="bg-tertiary py-16 md:py-24">
-        <div className="container-custom text-center">
-          <h1 className="text-primary mb-6">Gallery</h1>
-          <p className="text-xl max-w-3xl mx-auto">Images of our work, events, and community in action.</p>
+    <div>
+      <section className="bg-slate-100 py-12">
+        <div className="container">
+          <h1 className="text-3xl font-bold text-center">Gallery</h1>
+          <p className="text-center text-slate-600 mt-4">Images of our work, events, and community in action.</p>
         </div>
       </section>
 
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <h2 className="text-primary text-center mb-12">Event Highlights</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((img) => (
-              <div
-                key={img}
-                className="relative h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-              >
-                <Image
-                  src={`/placeholder.svg?height=400&width=600&text=Event+Image+${img}`}
-                  alt={`Event image ${img}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
+      {galleryCategories.map((category) => (
+        <section key={category.id} className="py-16">
+          <div className="container">
+            <h2 className="text-2xl font-bold mb-8 text-center">{category.title}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {category.images.map((image) => (
+                <div key={image.id} className="relative h-64 rounded-lg overflow-hidden group">
+                  <Image
+                    src={image.src || "/placeholder.svg"}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <Button variant="outline" className="text-white border-white hover:bg-white hover:text-black">
+                      View Larger
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ))}
 
-      <section className="section-padding bg-secondary/10">
-        <div className="container-custom">
-          <h2 className="text-primary text-center mb-12">Research Showcase</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((img) => (
-              <div
-                key={img}
-                className="relative h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-              >
-                <Image
-                  src={`/placeholder.svg?height=400&width=600&text=Research+Image+${img}`}
-                  alt={`Research image ${img}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
+      <section className="py-16 bg-primary text-primary-foreground">
+        <div className="container text-center">
+          <h2 className="text-2xl font-bold mb-4">Share Your Experience</h2>
+          <p className="max-w-2xl mx-auto mb-6">
+            Have photos from our events? We'd love to feature them in our gallery!
+          </p>
+          <Button variant="secondary">Submit Photos</Button>
         </div>
       </section>
-
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <h2 className="text-primary text-center mb-12">Team Building</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((img) => (
-              <div
-                key={img}
-                className="relative h-64 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
-              >
-                <Image
-                  src={`/placeholder.svg?height=400&width=600&text=Team+Image+${img}`}
-                  alt={`Team image ${img}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-padding bg-primary text-white">
-        <div className="container-custom text-center space-y-6">
-          <h2>Share Your Experience</h2>
-          <p className="max-w-2xl mx-auto">Have photos from our events? We'd love to feature them in our gallery!</p>
-          <Button className="bg-white text-primary hover:bg-white/90">Submit Photos</Button>
-        </div>
-      </section>
-    </>
+    </div>
   )
 }
 

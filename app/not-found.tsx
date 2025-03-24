@@ -1,17 +1,18 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] px-4">
-      <h1 className="text-6xl font-bold text-primary mb-4">404</h1>
-      <h2 className="text-2xl font-semibold mb-6">Page Not Found</h2>
-      <p className="text-lg text-gray-600 mb-8 text-center max-w-md">
-        The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+    <div className="container flex flex-col items-center justify-center min-h-[70vh] py-16 text-center">
+      <Image src="/images/logo.png" alt="Dr. Interested Logo" width={150} height={150} className="mb-8" />
+      <h1 className="text-4xl font-bold text-[#405862] mb-4">404 - Page Not Found</h1>
+      <p className="text-lg text-[#405862] mb-8 max-w-md">
+        The page you're looking for doesn't exist or has been moved.
       </p>
-      <Link href="/">
-        <Button className="btn-primary">Return to Home</Button>
-      </Link>
+      <Button className="bg-[#405862] hover:bg-[#334852]" asChild>
+        <Link href="/">Return to Home</Link>
+      </Button>
     </div>
   )
 }

@@ -1,134 +1,204 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Instagram, Linkedin, MessageSquare, ArrowRight } from "lucide-react"
-import { emailAddresses } from "@/data/contact"
+import { Instagram, Linkedin, ArrowUp, FileText } from "lucide-react"
 
-const Footer = () => {
+export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }
+
   return (
-    <footer className="bg-primary text-white">
-      <div className="container-custom py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <Link href="/" className="block hover-lift">
-              <Image src="/images/logo.png" alt="Dr. Interested Logo" width={180} height={70} className="h-16 w-auto" />
-            </Link>
-            <p className="text-base">
+    <footer className="bg-[#405862] text-white py-12">
+      <div className="container">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Column 1: Logo and Description */}
+          <div>
+            <div className="mb-4">
+              <Image src="/images/logo.png" alt="Dr. Interested Logo" width={150} height={150} className="mb-2" />
+            </div>
+            <p className="text-sm mb-4">
               Inspiring the next generation of healthcare professionals through education, collaboration, and meaningful
               experiences.
             </p>
-            <div className="flex space-x-4 mt-6">
+            <div className="flex space-x-4">
               <Link
                 href="https://www.instagram.com/dr.interested/"
-                target="_blank"
-                className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors"
-                aria-label="Instagram"
+                className="text-white hover:text-[#4ecdc4] transition-colors"
               >
-                <Instagram size={20} />
+                <Instagram className="h-6 w-6" />
               </Link>
               <Link
                 href="https://www.linkedin.com/company/dr-interested"
-                target="_blank"
-                className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors"
-                aria-label="LinkedIn"
+                className="text-white hover:text-[#4ecdc4] transition-colors"
               >
-                <Linkedin size={20} />
+                <Linkedin className="h-6 w-6" />
               </Link>
-              <Link
-                href="https://discord.gg/pzbGRgsGXY"
-                target="_blank"
-                className="bg-white/10 p-2 rounded-full hover:bg-white/20 transition-colors"
-                aria-label="Discord"
-              >
-                <MessageSquare size={20} />
+              <Link href="https://discord.gg/pzbGRgsGXY" className="text-white hover:text-[#4ecdc4] transition-colors">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-discord"
+                >
+                  <circle cx="9" cy="12" r="1" />
+                  <circle cx="15" cy="12" r="1" />
+                  <path d="M7.5 7.2c.3-.1.6-.2.8-.2h7.4c.2 0 .5.1.8.2M7.5 16.8c.3.1.6.2.8.2h7.4c.2 0 .5-.1.8-.2" />
+                  <path d="M16 3h-2a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2H4a2 2 0 0 0-2 2v3a8 8 0 0 0 4 7v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3a8 8 0 0 0 4-7V5a2 2 0 0 0-2-2z" />
+                </svg>
               </Link>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="text-xl font-semibold">Quick Links</h4>
-            <div className="h-1 w-12 bg-secondary mb-4"></div>
-            <nav className="flex flex-col space-y-2">
-              <Link href="/" className="text-base hover:text-secondary transition-colors group flex items-center">
-                <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="group-hover:translate-x-1 transition-transform">Home</span>
-              </Link>
-              <Link href="/work" className="text-base hover:text-secondary transition-colors group flex items-center">
-                <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="group-hover:translate-x-1 transition-transform">Our Work</span>
-              </Link>
-              <Link href="/events" className="text-base hover:text-secondary transition-colors group flex items-center">
-                <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="group-hover:translate-x-1 transition-transform">Events</span>
-              </Link>
-              <Link
-                href="/members"
-                className="text-base hover:text-secondary transition-colors group flex items-center"
-              >
-                <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="group-hover:translate-x-1 transition-transform">Members</span>
-              </Link>
-              <Link
-                href="/contact"
-                className="text-base hover:text-secondary transition-colors group flex items-center"
-              >
-                <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="group-hover:translate-x-1 transition-transform">Contact</span>
-              </Link>
-              <Link
-                href="/gallery"
-                className="text-base hover:text-secondary transition-colors group flex items-center"
-              >
-                <ArrowRight size={14} className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="group-hover:translate-x-1 transition-transform">Gallery</span>
-              </Link>
-            </nav>
+          {/* Column 2: Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">
+              Quick Links
+              <div className="w-12 h-1 bg-[#4ecdc4] mt-2"></div>
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/our-work" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  Our Work
+                </Link>
+              </li>
+              <li>
+                <Link href="/events" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  Events
+                </Link>
+              </li>
+              <li>
+                <Link href="/members" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  Members
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/gallery" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  Gallery
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms" className="text-sm hover:text-[#4ecdc4] transition-colors flex items-center gap-1">
+                  <FileText className="h-3 w-3" />
+                  Terms & Conditions
+                </Link>
+              </li>
+            </ul>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="text-xl font-semibold">Contact Us</h4>
-            <div className="h-1 w-12 bg-secondary mb-4"></div>
-            <div className="space-y-3">
-              {emailAddresses.map((item, index) => (
-                <div key={index} className="group">
-                  <p className="text-sm font-medium text-secondary">{item.department}</p>
-                  <a
-                    href={`mailto:${item.email}`}
-                    className="text-base hover:text-secondary transition-colors block group-hover:translate-x-1 transition-transform"
-                  >
-                    {item.email}
-                  </a>
-                </div>
-              ))}
-            </div>
+          {/* Column 3: Contact Us */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">
+              Contact Us
+              <div className="w-12 h-1 bg-[#4ecdc4] mt-2"></div>
+            </h3>
+            <ul className="space-y-4">
+              <li>
+                <div className="text-[#4ecdc4] font-medium text-sm">Administration</div>
+                <a href="mailto:admin@drinterested.tech" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  admin@drinterested.tech
+                </a>
+              </li>
+              <li>
+                <div className="text-[#4ecdc4] font-medium text-sm">Human Resources</div>
+                <a href="mailto:hr@drinterested.tech" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  hr@drinterested.tech
+                </a>
+              </li>
+              <li>
+                <div className="text-[#4ecdc4] font-medium text-sm">Outreach</div>
+                <a href="mailto:outreach@drinterested.tech" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  outreach@drinterested.tech
+                </a>
+              </li>
+              <li>
+                <div className="text-[#4ecdc4] font-medium text-sm">Technology</div>
+                <a href="mailto:tech@drinterested.tech" className="text-sm hover:text-[#4ecdc4] transition-colors">
+                  tech@drinterested.tech
+                </a>
+              </li>
+            </ul>
           </div>
 
-          <div className="space-y-4">
-            <h4 className="text-xl font-semibold">Stay Updated</h4>
-            <div className="h-1 w-12 bg-secondary mb-4"></div>
-            <p className="text-base">Subscribe to our newsletter for the latest events and opportunities.</p>
-            <form className="space-y-2">
-              <Input
+          {/* Column 4: Stay Updated */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">
+              Stay Updated
+              <div className="w-12 h-1 bg-[#4ecdc4] mt-2"></div>
+            </h3>
+            <p className="text-sm mb-4">Subscribe to our newsletter for the latest events and opportunities.</p>
+            <form className="space-y-2" onSubmit={(e) => e.preventDefault()}>
+              <input
                 type="email"
                 placeholder="Your email address"
-                className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:ring-secondary"
+                className="w-full px-4 py-2 rounded-md bg-[#4f6b75] border-none text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4ecdc4]"
               />
-              <Button className="w-full bg-secondary hover:bg-secondary/90 text-white flex items-center justify-center gap-2">
+              <button
+                type="submit"
+                className="w-full bg-[#4ecdc4] text-white py-2 px-4 rounded-md flex items-center justify-center hover:bg-[#3dbdb5] transition-colors"
+              >
                 Sign Up
-                <ArrowRight size={16} />
-              </Button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="ml-2 h-5 w-5"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </button>
             </form>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-white/20 text-center">
-          <p className="text-sm">&copy; {new Date().getFullYear()} Dr. Interested. All rights reserved.</p>
+        <div className="mt-12 pt-6 border-t border-[#4f6b75] flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-sm">© 2025 Dr. Interested. All rights reserved.</div>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/terms"
+              className="text-sm text-white hover:text-[#4ecdc4] transition-colors flex items-center gap-1 bg-[#4f6b75] px-3 py-1 rounded-md"
+            >
+              <FileText className="h-4 w-4" />
+              Terms & Conditions
+            </Link>
+            <button
+              onClick={scrollToTop}
+              className="text-white hover:text-[#4ecdc4] transition-colors bg-[#4f6b75] p-2 rounded-full"
+              aria-label="Scroll to top"
+            >
+              <ArrowUp className="h-5 w-5" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>
   )
 }
-
-export default Footer
 

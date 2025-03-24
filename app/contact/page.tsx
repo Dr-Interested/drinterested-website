@@ -1,158 +1,215 @@
+"use client"
+
+import type React from "react"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, MessageSquare, Linkedin, Instagram } from "lucide-react"
+import { Mail, MapPin, Phone, Instagram, Linkedin } from "lucide-react"
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  })
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle form submission
+    console.log("Form submitted:", formData)
+    // Reset form
+    setFormData({ name: "", email: "", subject: "", message: "" })
+    // Show success message
+    alert("Message sent! We'll get back to you soon.")
+  }
+
   return (
-    <>
-      <section className="bg-tertiary py-16 md:py-24">
-        <div className="container-custom text-center">
-          <h1 className="text-primary mb-6">Contact Us</h1>
-          <p className="text-xl max-w-3xl mx-auto">
+    <div>
+      <section className="bg-slate-100 py-12">
+        <div className="container">
+          <h1 className="text-3xl font-bold text-center">Contact Us</h1>
+          <p className="text-center text-slate-600 mt-4">
             Have questions or want to get involved? We'd love to hear from you!
           </p>
         </div>
       </section>
 
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-primary mb-4">Get in Touch</h2>
-                <p>
-                  Whether you have questions about our events, want to collaborate, or are interested in joining our
-                  team, we're here to help.
-                </p>
-              </div>
+      <section className="py-16">
+        <div className="container">
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
+              <p className="text-slate-600 mb-8">
+                Whether you have questions about our events, want to collaborate, or are interested in joining our team,
+                we're here to help.
+              </p>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <Mail className="text-primary mt-1" size={24} />
+                  <Mail className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <h3 className="text-xl font-semibold">Email Us</h3>
-                    <p className="text-lg">info@drinterested.org</p>
-                    <p className="text-gray-600">We'll respond within 48 hours</p>
+                    <h3 className="font-semibold">Email</h3>
+                    <p className="text-slate-600">admin@drinterested.tech</p>
+                    <p className="text-sm text-slate-500">We'll respond within 48 hours</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <MessageSquare className="text-primary mt-1" size={24} />
+                  <MapPin className="h-5 w-5 text-primary mt-1" />
                   <div>
-                    <h3 className="text-xl font-semibold">Join Our Discord</h3>
-                    <p className="text-lg">Connect with our community</p>
-                    <Button className="mt-2 bg-[#5865F2] hover:bg-[#5865F2]/90">
+                    <h3 className="font-semibold">Location</h3>
+                    <p className="text-slate-600">Connect with our community</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Phone className="h-5 w-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold">Follow Us</h3>
+                    <div className="flex space-x-4 mt-2">
                       <a
-                        href="https://discord.gg/pzbGRgsGXY"
+                        href="https://www.instagram.com/dr.interested/"
                         target="_blank"
-                        className="flex items-center gap-2"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
+                        className="text-slate-600 hover:text-primary"
                       >
-                        Join Discord
+                        <Instagram className="h-5 w-5" />
                       </a>
-                    </Button>
+                      <a
+                        href="https://www.linkedin.com/company/dr-interested"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-600 hover:text-primary"
+                      >
+                        <Linkedin className="h-5 w-5" />
+                      </a>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <h3 className="text-xl font-semibold">Follow Us</h3>
-                <div className="flex gap-4">
-                  <a
-                    href="https://www.instagram.com/dr.interested/"
-                    target="_blank"
-                    className="flex items-center gap-2 text-gray-700 hover:text-secondary transition-colors"
-                    rel="noreferrer"
-                  >
-                    <Instagram size={24} />
-                    <span>Instagram</span>
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/company/dr-interested"
-                    target="_blank"
-                    className="flex items-center gap-2 text-gray-700 hover:text-secondary transition-colors"
-                    rel="noreferrer"
-                  >
-                    <Linkedin size={24} />
-                    <span>LinkedIn</span>
-                  </a>
                 </div>
               </div>
             </div>
 
-            <div className="bg-tertiary p-8 rounded-lg shadow-md">
-              <h2 className="text-primary mb-6">Send Us a Message</h2>
-              <form className="space-y-6">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
-                    Name
-                  </label>
-                  <Input id="name" placeholder="Your name" />
+            <div>
+              <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
+              <form onSubmit={handleSubmit}>
+                <div className="space-y-4">
+                  <div className="grid gap-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      required
+                    />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="your.email@example.com"
+                      required
+                    />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="subject">Subject</Label>
+                    <Input
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="What is this regarding?"
+                      required
+                    />
+                  </div>
+
+                  <div className="grid gap-2">
+                    <Label htmlFor="message">Your message</Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="How can we help you?"
+                      rows={5}
+                      required
+                    />
+                  </div>
+
+                  <Button type="submit" className="w-full">
+                    Send Message
+                  </Button>
                 </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
-                    Email
-                  </label>
-                  <Input id="email" type="email" placeholder="Your email address" />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-sm font-medium">
-                    Subject
-                  </label>
-                  <Input id="subject" placeholder="What is this regarding?" />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-sm font-medium">
-                    Message
-                  </label>
-                  <Textarea id="message" placeholder="Your message" rows={5} />
-                </div>
-                <Button className="btn-primary w-full">Send Message</Button>
               </form>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-secondary/10">
-        <div className="container-custom text-center space-y-6">
-          <h2 className="text-primary">Frequently Asked Questions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left mt-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-primary mb-2">How can I join Dr.Interested?</h3>
-              <p>
-                We open applications for new members periodically. Follow us on social media or join our mailing list to
-                be notified when applications open.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-primary mb-2">Do I need to be pre-med to join?</h3>
-              <p>
-                Not at all! We welcome all high school students interested in healthcare, regardless of their future
-                career plans.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-primary mb-2">Are your events only for members?</h3>
-              <p>
-                Most of our webinars and workshops are open to all interested students. Some special events may be
-                member-exclusive.
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-primary mb-2">
-                How can my school collaborate with Dr.Interested?
-              </h3>
-              <p>
-                We're always open to school partnerships! Contact our Outreach Department to discuss potential
-                collaborations.
-              </p>
-            </div>
+      <section className="py-16 bg-slate-50">
+        <div className="container">
+          <h2 className="text-2xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">How can I join Dr. Interested?</h3>
+                <p className="text-slate-600">
+                  We open applications for new members periodically. Check our social media or join our mailing list to
+                  be notified when applications are open.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Do I need to be pre-med to join?</h3>
+                <p className="text-slate-600">
+                  Not at all! We welcome all high school students interested in healthcare, regardless of their future
+                  career plans.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Are your events only for members?</h3>
+                <p className="text-slate-600">
+                  Most of our webinars and educational events are open to all interested students. Some special events
+                  may be member-exclusive.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">How many schools collaborate with Dr. Interested?</h3>
+                <p className="text-slate-600">
+                  We're always open to school partnerships and currently work with several high schools. Contact our
+                  Outreach Department for potential collaborations.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }
 
