@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Instagram, Linkedin, FileText } from "lucide-react"
+import ScrollToTop from "@/components/scroll-to-top"
 
 export default function Home() {
   // Scroll to top on page load
@@ -13,6 +14,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <ScrollToTop />
       {/* Hero Section */}
       <section className="bg-[#f5f1eb] py-16 md:py-24">
         <div className="container grid gap-8 md:grid-cols-2 md:gap-12 items-center">

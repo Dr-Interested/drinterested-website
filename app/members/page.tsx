@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Instagram, Linkedin, Globe, ChevronDown, ChevronUp, Clock } from "lucide-react"
 import { president, departments } from "@/data/members"
+import ScrollToTop from "@/components/scroll-to-top"
 
 export default function MembersPage() {
   const [expandedBios, setExpandedBios] = useState<Record<string, boolean>>({})
@@ -38,6 +39,7 @@ export default function MembersPage() {
 
   return (
     <div>
+      <ScrollToTop />
       <section className="bg-[#f5f1eb] py-16">
         <div className="container">
           <h1 className="text-4xl font-bold text-center mb-4 text-[#405862]">Our Team</h1>

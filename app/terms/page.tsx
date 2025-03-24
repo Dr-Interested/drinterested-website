@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import Link from "next/link"
 import { FileText } from "lucide-react"
+import ScrollToTop from "@/components/scroll-to-top"
 
 export default function TermsPage() {
   // Scroll to top on page load
@@ -12,6 +13,7 @@ export default function TermsPage() {
 
   return (
     <div className="container py-16 max-w-4xl">
+      <ScrollToTop />
       <div className="bg-[#405862] text-white p-6 rounded-lg mb-8 shadow-md">
         <h1 className="text-3xl font-bold mb-2 text-center">Terms and Conditions</h1>
         <p className="text-center mb-0">Please read these terms carefully before using our services.</p>

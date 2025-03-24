@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -20,13 +20,7 @@ const routes = [
 
 export default function Navbar() {
   const pathname = usePathname()
-  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
-
-  // Scroll to top when route changes
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [pathname])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
